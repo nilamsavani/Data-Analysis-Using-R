@@ -1,0 +1,21 @@
+data_US <- read.csv("E:/Nilam/2nd Term/Advanced Database Topics/Projects/Project 1/refugges/1/UNdata_Export_20180512_213810165.csv")
+retrival_data_canada <- subset(data_US, Country=="United States")
+final_data_US <-aggregate(Total.refugees.and.people.in.refugee.like.situations.sup.....sup.~Year+Country, data=retrival_data_canada, FUN=sum) 
+write.csv(final_data_canada,"E:/Nilam/2nd Term/Advanced Database Topics/Projects/Project 1/refugges/1/outputUSdata.csv", row.names = FALSE)
+
+# Get the max year and refugees from data frame.
+Max_refugees_US <- max(final_data_US$Total.refugees.and.people.in.refugee.like.situations.sup.....sup.)
+Max_year_US <- max(final_data_US$Year)
+
+png(file="2_Line_US.jpg")
+par(mar=c(5,6,4,2)+0.1)
+plot(final_data_US$Year, col="red", final_data_US$Total.refugees.and.people.in.refugee.like.situations.sup.....sup. , pch=20, type="o", ylim=c(0,Max_refugees_US), xlim=c(1975,Max_year_US), axes=FALSE, ann=FALSE)
+axis(1, las=1, at=5*0:Max_year_US)
+axis(2, las=2, at=50000*0:Max_refugees_US)
+box()
+title(main="Refugees In US", col.main="blue" ,  font.main=4, font.lab=4, cex.main=1.5)
+title(xlab="Year")
+title(ylab="")
+mtext("Total No. Of Refugees",side=2,line=5)
+#title(ylab="Total No. Of Refugees" , line=3, cex.lab=1.3,col.lab=rgb(0,0.5,0))
+dev.off()
